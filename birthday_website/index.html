@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#FF9FB2',secondary:'#FFCCD5'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Montserrat', sans-serif;
+overflow-x: hidden;
+}
+.dancing-script {
+font-family: 'Dancing Script', cursive;
+}
+.confetti {
+position: absolute;
+width: 10px;
+height: 10px;
+background-color: #FFC0CB;
+border-radius: 50%;
+animation: fall 5s ease-in infinite;
+opacity: 0;
+}
+@keyframes fall {
+0% {
+transform: translateY(-100px) rotate(0deg);
+opacity: 1;
+}
+100% {
+transform: translateY(800px) rotate(360deg);
+opacity: 0;
+}
+}
+.floating {
+animation: floating 3s ease-in-out infinite;
+}
+@keyframes floating {
+0% { transform: translateY(0px); }
+50% { transform: translateY(-15px); }
+100% { transform: translateY(0px); }
+}
+.heart {
+position: absolute;
+width: 20px;
+height: 20px;
+background-color: #FF9FB2;
+transform: rotate(45deg);
+opacity: 0.6;
+animation: float 6s ease-in-out infinite;
+}
+.heart:before, .heart:after {
+content: "";
+width: 20px;
+height: 20px;
+background-color: #FF9FB2;
+border-radius: 50%;
+position: absolute;
+}
+.heart:before {
+top: -10px;
+left: 0;
+}
+.heart:after {
+top: 0;
+left: -10px;
+}
+@keyframes float {
+0% { transform: translateY(0) rotate(45deg); opacity: 0.6; }
+50% { transform: translateY(-20px) rotate(45deg); opacity: 0.3; }
+100% { transform: translateY(0) rotate(45deg); opacity: 0.6; }
+}
+.typewriter {
+overflow: hidden;
+white-space: nowrap;
+margin: 0 auto;
+animation: typing 3.5s steps(40, end);
+}
+@keyframes typing {
+from { width: 0 }
+to { width: 100% }
+}
+.fade-in {
+animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+.audio-player {
+position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 100;
+}
+.cake-container {
+position: relative;
+width: 240px;
+height: 240px;
+margin: 0 auto;
+animation: cakeFloat 3s ease-in-out infinite;
+}
+.cake-image {
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+.cake-sparkles {
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+pointer-events: none;
+}
+.cake-sparkle {
+position: absolute;
+width: 4px;
+height: 4px;
+background: #FFD700;
+border-radius: 50%;
+animation: sparkle 2s ease-in-out infinite;
+}
+.cake-sparkle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.cake-sparkle:nth-child(2) { top: 30%; left: 70%; animation-delay: 0.3s; }
+.cake-sparkle:nth-child(3) { top: 70%; left: 30%; animation-delay: 0.6s; }
+.cake-sparkle:nth-child(4) { top: 60%; left: 60%; animation-delay: 0.9s; }
+.cake-sparkle:nth-child(5) { top: 40%; left: 40%; animation-delay: 1.2s; }
+
+@keyframes cakeFloat {
+0% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-10px) rotate(1deg); }
+100% { transform: translateY(0) rotate(0deg); }
+}
+@keyframes sparkle {
+0% { transform: scale(1); opacity: 0.3; }
+50% { transform: scale(1.5); opacity: 1; }
+100% { transform: scale(1); opacity: 0.3; }
+}
+</style>
+</head>
+<body class="bg-[#FFFAF0] min-h-screen">
+<!-- Background Hearts -->
+<div id="hearts-container" class="fixed w-full h-full pointer-events-none"></div>
+<!-- Hero Section -->
+<section id="hero" class="h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+<div id="confetti-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+<h1 class="dancing-script text-5xl text-center text-primary mb-6 floating">Happy Birthday, Affuu!</h1>
+<p class="text-lg text-center text-gray-700 mb-8 max-w-xs fade-in">To my dearest friend, who fills every day with joy and laughter. Here's to celebrating you!</p>
+<div class="cake-container mb-8">
+<img src="images/cake.jpg" alt="Birthday Cake" class="cake-image">
+<div class="cake-sparkles">
+<div class="cake-sparkle"></div>
+<div class="cake-sparkle"></div>
+<div class="cake-sparkle"></div>
+<div class="cake-sparkle"></div>
+<div class="cake-sparkle"></div>
+</div>
+</div>
+<div class="absolute bottom-10 left-0 w-full flex justify-center">
+<a href="#message" class="animate-bounce">
+<i class="ri-arrow-down-line ri-2x text-primary"></i>
+</a>
+</div>
+</section>
+<!-- Message Section -->
+<section id="message" class="h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-[#FFFAF0] to-[#FFE4E1] relative">
+<div class="w-full max-w-sm bg-white rounded-lg shadow-lg p-6 mb-8 relative">
+<div class="absolute -top-4 -right-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+<i class="ri-heart-fill ri-lg text-white"></i>
+</div>
+<h2 class="dancing-script text-3xl text-primary mb-4">My Other Half!!</h2>
+<div class="text-sm text-gray-700 leading-relaxed">
+<p class="mb-3">Hey ❤️,</p>
+<p class="mb-3">Can you believe it's been over five years since we first met? 🕰️💫 Time has flown by so quickly—it hardly feels like it's been that long. And yet, despite all those years, I still feel the same spark ✨, the same excitement every time I'm with you 💞.</p>
+<p class="mb-3">The energy between us is just as electric ⚡, just as alive as it was in the beginning.</p>
+<p class="mb-3">Over the years, we've shared countless beautiful moments 💖 and created so many memories together. But looking back, I realized we don't have many photos to capture those precious times 📸.</p>
+<p class="mb-3">So, I created some images that reflect how I see us—snapshots of the love, laughter, and joy we've shared 🥰.</p>
+<p class="mb-3">Take a look 👀. I hope they remind you, even just a little, of the incredible journey we've been on together 🌹🌌.</p>
+<p>Happy Birthday ❤️</p>
+</div>
+</div>
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg floating">
+<i class="ri-heart-3-fill ri-2x text-white"></i>
+</div>
+<div class="absolute bottom-10 left-0 w-full flex justify-center">
+<a href="#gallery" class="animate-bounce">
+<i class="ri-arrow-down-line ri-2x text-primary"></i>
+</a>
+</div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery" class="h-screen flex flex-col items-center justify-center py-6 bg-white relative">
+<h2 class="dancing-script text-4xl text-center text-primary mb-6">Our Memories</h2>
+<div class="relative w-full h-[75vh] overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="flex flex-col items-center w-full max-w-2xl mx-auto px-2">
+<div class="relative w-full max-w-[500px] gallery-item">
+<div class="w-full h-[450px] rounded-lg shadow-lg overflow-hidden bg-white p-2">
+<img src="images/hug.jpeg" alt="Memory 1" class="w-full h-full object-contain">
+</div>
+<div class="mt-4 text-center">
+<p class="dancing-script text-2xl text-primary mb-2">Our First Hug ❤️</p>
+<p class="text-lg text-gray-700 leading-relaxed">The warmest, most unforgettable hug that started our beautiful journey together. A moment frozen in time, filled with warmth and love.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 left-0 w-full flex flex-col items-center gap-4">
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+</div>
+<a href="#final" class="animate-bounce">
+<i class="ri-arrow-down-line ri-2x text-primary"></i>
+</a>
+</div>
+</section>
+<!-- Final Section -->
+<section id="final" class="h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-[#FFE4E1] to-[#FFFAF0] relative">
+<div class="w-32 h-32 rounded-full bg-primary flex items-center justify-center mb-8 shadow-lg floating">
+<i class="ri-heart-3-fill ri-3x text-white"></i>
+</div>
+<h2 class="dancing-script text-4xl text-center text-primary mb-4">Love you always</h2>
+<p class="text-lg text-center text-gray-700 mb-8 max-w-xs">Today and every day, you make my world brighter</p>
+<div class="text-center">
+<p class="dancing-script text-2xl text-primary">June 18, 2025</p>
+<p class="text-sm text-gray-600 mt-2">A special day</p>
+</div>
+</section>
+<script id="confetti-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Create confetti
+function createConfetti(container, count) {
+const colors = ['#FF9FB2', '#FFCCD5', '#FFD700', '#FFC0CB', '#FFB6C1'];
+for (let i = 0; i < count; i++) {
+const confetti = document.createElement('div');
+confetti.classList.add('confetti');
+confetti.style.left = Math.random() * 100 + 'vw';
+confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+confetti.style.width = Math.random() * 10 + 5 + 'px';
+confetti.style.height = confetti.style.width;
+confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+confetti.style.animationDelay = Math.random() * 5 + 's';
+container.appendChild(confetti);
+}
+}
+
+// Create hearts
+function createHearts() {
+const container = document.getElementById('hearts-container');
+const count = 15;
+for (let i = 0; i < count; i++) {
+const heart = document.createElement('div');
+heart.classList.add('heart');
+heart.style.left = Math.random() * 100 + 'vw';
+heart.style.top = Math.random() * 100 + 'vh';
+heart.style.opacity = Math.random() * 0.5 + 0.1;
+heart.style.animationDuration = Math.random() * 6 + 4 + 's';
+heart.style.animationDelay = Math.random() * 5 + 's';
+container.appendChild(heart);
+}
+}
+
+// Initialize confetti and hearts
+createConfetti(document.getElementById('confetti-container'), 50);
+createHearts();
+});
+</script>
+<script id="message-toggle-script">
+document.addEventListener('DOMContentLoaded', function() {
+const readMoreBtn = document.getElementById('read-more');
+const shortMessage = document.getElementById('short-message');
+const fullMessage = document.getElementById('full-message');
+readMoreBtn.addEventListener('click', function() {
+if (fullMessage.classList.contains('hidden')) {
+fullMessage.classList.remove('hidden');
+shortMessage.classList.add('hidden');
+readMoreBtn.textContent = 'Read Less ↑';
+} else {
+fullMessage.classList.add('hidden');
+shortMessage.classList.remove('hidden');
+readMoreBtn.textContent = 'Read More ↓';
+}
+});
+});
+</script>
+<style>
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.sticky-note {
+  transform-origin: center;
+  backdrop-filter: blur(4px);
+}
+</style>
+<script id="gallery-navigation-script">
+document.addEventListener('DOMContentLoaded', function() {
+  const images = [
+  {
+    src: "images/hug.jpeg",
+    title: "Our First Hug ❤️",
+    description: "The warmest, most unforgettable hug that started our beautiful journey together 🤗. A moment frozen in time, filled with warmth and love ❤️✨."
+  },
+  {
+    src: "images/home.jpeg",
+    title: "Home Visit 🏡",
+    description: "A moment of pure comfort and peace, where we created memories in the warmth of home 🍵❤️. Every corner filled with laughter and joy 😊✨."
+  },
+  {
+    src: "images/bus.jpeg",
+    title: "Bus Stop Hug 🚌",
+    description: "An unexpected and unforgettable moment at the bus stop 🥰. A simple hug that meant the world, making ordinary moments extraordinary ❤️✨."
+  },
+  {
+    src: "images/cafe.jpeg",
+    title: "Café Connection ☕",
+    description: "Standing close, phone in hand 📱, fingertips slowly running through hair — a silent reminder that loneliness is kept at bay ❤️🌹."
+  },
+  {
+    src: "images/shoes.jpeg",
+    title: "Shoe Tying 👟",
+    description: "Twenty, yet still unsure how to tie a shoe 👟 — a moment made warm by tying laces without shame, a pure expression of care ❤️✨."
+  },
+  {
+    src: "images/gift.jpeg",
+    title: "Messages of Love 📔",
+    description: "A diary filled with messages for every feeling ❤️📝 — turning difficult moments into something softer, more bearable, and more beautiful 🌸✨."
+  },
+  {
+    src: "images/horror.jpeg",
+    title: "Hand in Hand 🏰",
+    description: "Walking through the haunted ride, grip growing tighter with every twist 👻 — turning fear into something exhilarating and comforting ❤️🎡."
+  },
+  {
+    src: "images/roses.jpeg",
+    title: "Roses of Connection 🌹",
+    description: "Roses carefully chosen and carried across the distance 🌹 — a symbol of a feeling that’s pure, sincere, and unlike anything else ❤️✨."
+  },
+  {
+    src: "images/routien.jpeg",
+    title: "Everyday Bond 💫",
+    description: "Sharing stories, worries, happiness — turning routines into something rich, deep, and effortlessly comforting ❤️🌟."
+  },
+  {
+    src: "images/rainbow.png",
+    title: "The Rainbow Moment 🌈",
+    description: "Finding refuge under a nearby shop during a rain shower ☔ — a moment made even more magical by a rainbow coloring the sky afterwards 🌈✨."
+  }
+];
+
+
+let currentIndex = 0;
+const galleryItem = document.querySelector('.gallery-item');
+const dots = document.querySelectorAll('.w-2');
+let startX, endX;
+const minSwipeDistance = 50;
+
+function updateGallery() {
+  const image = images[currentIndex];
+  galleryItem.innerHTML = `
+    <div class="w-full h-[450px] rounded-lg shadow-lg overflow-hidden bg-white p-2">
+      <img src="${image.src}" alt="${image.title}" class="w-full h-full object-contain">
+    </div>
+    <div class="mt-4 text-center">
+      <p class="dancing-script text-2xl text-primary mb-2">${image.title}</p>
+      <p class="text-lg text-gray-700 leading-relaxed">${image.description}</p>
+    </div>
+  `;
+  
+  // Update dots
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('bg-primary', index === currentIndex);
+    dot.classList.toggle('bg-gray-300', index !== currentIndex);
+  });
+}
+
+// Touch events for swipe
+galleryItem.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+galleryItem.addEventListener('touchmove', (e) => {
+  endX = e.touches[0].clientX;
+});
+
+galleryItem.addEventListener('touchend', () => {
+  if (!startX || !endX) return;
+  
+  const distance = startX - endX;
+  const isLeftSwipe = distance > minSwipeDistance;
+  const isRightSwipe = distance < -minSwipeDistance;
+  
+  if (isLeftSwipe) {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateGallery();
+  } else if (isRightSwipe) {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateGallery();
+  }
+  
+  startX = null;
+  endX = null;
+});
+
+// Mouse events for swipe
+galleryItem.addEventListener('mousedown', (e) => {
+  startX = e.clientX;
+});
+
+galleryItem.addEventListener('mousemove', (e) => {
+  if (!startX) return;
+  endX = e.clientX;
+});
+
+galleryItem.addEventListener('mouseup', () => {
+  if (!startX || !endX) return;
+  
+  const distance = startX - endX;
+  const isLeftSwipe = distance > minSwipeDistance;
+  const isRightSwipe = distance < -minSwipeDistance;
+  
+  if (isLeftSwipe) {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateGallery();
+  } else if (isRightSwipe) {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateGallery();
+  }
+  
+  startX = null;
+  endX = null;
+});
+
+// Initialize gallery
+updateGallery();
+});
+</script>
+<script id="smooth-scroll-script">
+document.addEventListener('DOMContentLoaded', function() {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+targetElement.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
+});
+</script>
+</body>
+</html>
